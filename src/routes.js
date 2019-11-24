@@ -3,11 +3,11 @@ const express = require('express');
 const router = express.Router();
 
 const userRoutes = require('./routes/user');
-
-const UserController = require('./controllers/UserController');
+const dataTypeRoutes = require('./routes/dataType');
 
 
 router.use('/user', userRoutes);
+router.use('/datatype',dataTypeRoutes)
 
 /*
 // Definindo as rotas para os métodos do controlador de user
