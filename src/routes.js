@@ -1,13 +1,18 @@
-const express = require('express');
+const express = require('express')
 
-const router = express.Router();
+const router = express.Router()
 
-const userRoutes = require('./routes/user');
-const dataTypeRoutes = require('./routes/dataType');
+const userRoutes = require('./routes/user')
+const dataTypeRoutes = require('./routes/dataType')
+const deviceRoutes = require('./routes/device')
+const sensorRoutes = require('./routes/sensor')
+const measurementRoutes = require('./routes/measurement')
 
-
-router.use('/user', userRoutes);
+router.use('/user', userRoutes)
 router.use('/datatype',dataTypeRoutes)
+router.use('/device',deviceRoutes)
+router.use('/device',sensorRoutes)
+router.use('/measurement',measurementRoutes)
 
 /*
 // Definindo as rotas para os métodos do controlador de user

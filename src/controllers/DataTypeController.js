@@ -11,21 +11,18 @@ const DataType = require('../models/DataType');
 module.exports = {
     async create(req, res) {
         const json = req.body;
-        let datatype = await DataType.findOne({ id: json.id });
-
-        if (!datatype) {
-            datatype = await DataType.create(json);
-        }
+        datatype = await DataType.create(json);
+ 
 
         return res.json(datatype);
     },
 
     async edit(req, res) {
         const json = req.body;
-        let datatype = await DataType.findOne({ id: json.id });
+        let datatype = await DataType.findOne({ _id: json.id });
 
         if (datatype) {
-            datatype = await DataType.update({ id: json.id}, json)
+            datatype = await DataType.update({ _id: json.id}, json)
         }
 
         return res.json(datatype);
@@ -102,17 +99,17 @@ module.exports = {
 
     async showDataType(req, res) {
         const json = req.params;
-        const datatype = await DataType.find({ id: json.id })
+        const datatype = await DataType.find({ _id: json.id })
 
         return res.json(datatype)
     },
 
     async deleteDataType(req, res) {
         const json = req.params;
-        let datatype = await DataType.find({ id: json.id })
+        let datatype = await DataType.find({ _id: json.id })
 
         if(datatype){
-            datatype = await DataType.deleteOne({id:json.id})
+            datatype = await DataType.deleteOne({_id:json.id})
         }
 
         return res.json(datatype)
