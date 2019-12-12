@@ -1,4 +1,5 @@
 const Measurement = require('../models/Measurement');
+const Sensor = require('../models/Sensor');
 
 module.exports = {
     async create(req, res) {
@@ -22,7 +23,7 @@ module.exports = {
     async show(req, res) {
         const json = req.body;
 
-        const measurement = await Measurement.find({ person_id: json.person_id })
+        const measurement = await Measurement.find({ 'person.id': json.id })
 
         return res.json(measurement)
     },
@@ -30,14 +31,14 @@ module.exports = {
     async showDeviceMeasurement(req, res) {
         const json = req.params;
 
-        const measurement = await Measurement.find({ device_id: json.id })
+        const measurement = await Measurement.find({'sensor.id' : Sensor.findOne({'device.id' : json.id})})
 
         return res.json(measurement)
     },
 
     async showDeviceMeasurementCount(req, res) {
         const json = req.params;
-        const measurement = await Measurement.find({ device_id: json.device_id })
+        const measurement = await Measurement.find({'sensor.id' : Sensor.find({'device.id' : json.id})})
 
         var count = Object.keys(measurement).length
 
@@ -47,14 +48,14 @@ module.exports = {
     async showSensorMeasurement(req, res) {
         const json = req.params;
 
-        const measurement = await Measurement.find({ sensor_id: json.sensor_id })
+        const measurement = await Measurement.find({ 'sensor.id': json.id })
 
         return res.json(measurement)
     },
 
     async showSensorMeasurementCount(req, res) {
         const json = req.params;
-        const measurement = await Measurement.find({ sensor_id: json.sensor_id })
+        const measurement = await Measurement.find({ 'sensor.id': json.id})
 
         var count = Object.keys(measurement).length
 
@@ -65,14 +66,14 @@ module.exports = {
     async showAreaMeasurement(req, res) {
         const json = req.params;
         
-        const measurement = await Measurement.find({ area_id : json.area_id })
+        const measurement = await Measurement.find({ 'area.id' : json.id })
         
         return res.json(measurement)
     },
 
     async showAreaMeasurementCount(req, res) {
         const json = req.params;
-        const measurement = await Measurement.find({ area_id: json.area_id })
+        const measurement = await Measurement.find({ 'area.id' : json.id })
   
 
         var count = Object.keys(measurement).length
@@ -82,14 +83,14 @@ module.exports = {
     async showDataTypeMeasurement(req, res) {
         const json = req.params;
         
-        const measurement = await Measurement.find({ datatype_id : json.datatype_id })
+        const measurement = await Measurement.find({ 'datatype.id' : json.id })
         
         return res.json(measurement)
     },
 
     async showDataTypeMeasurementCount(req, res) {
         const json = req.params;
-        const measurement = await Measurement.find({ datatype_id : json.datatype_id })
+        const measurement = await Measurement.find({ 'datatype.id' : json.id })
   
 
         var count = Object.keys(measurement).length

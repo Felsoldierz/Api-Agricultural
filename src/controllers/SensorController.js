@@ -21,16 +21,18 @@ module.exports = {
     },
 
     async showArea(req, res) {
-        const json = req.body;
-        let device = await Device.find({area_id: json.area_id})
-        const sensor = await Sensor.find({ device_id: device._id })
+        const json = req.params;
+    
+        const device = await Device.find({'area.id' : json.id},{_id:1})
+        const sensor = await Sensor.find({'device.id' : device})
 
-        return res.json(sensor)
+        return res.json(device)
     },
     async showAreaCount(req, res) {
-        const json = req.body;
-        let device = await Device.find({area_id: json.area_id})
-        const sensor = await Sensor.find({ device_id: device._id })
+        const json = req.params;
+        const device = await Device.find({'area.id' : json.id})
+        
+        const sensor = await Sensor.find({'device.id' : device._id })
 
         var count = Object.keys(sensor).length
 
@@ -40,7 +42,7 @@ module.exports = {
     async showDataTypeSensor(req, res) {
         const json = req.params;
 
-        const sensor = await Sensor.find({ datatype_id: json.datatype_id })
+        const sensor = await Sensor.find({ 'datatype.id': json.id })
         
         return res.json(sensor)
     },
@@ -48,7 +50,7 @@ module.exports = {
     async showDataTypeCount(req, res) {
         const json = req.params;
 
-        const sensor = await Sensor.find({ datatype_id: json.datatype_id })
+        const sensor = await Sensor.find({ 'datatype_id': json.id })
         
         var count = Object.keys(sensor).length
 
@@ -58,7 +60,7 @@ module.exports = {
     async showDeviceSensor(req, res) {
         const json = req.params;
 
-        const sensor = await Sensor.find({ datatype_id: json.datatype_id })
+        const sensor = await Sensor.find({ 'device.id': json.id })
         
         return res.json(sensor)
     },
@@ -66,7 +68,7 @@ module.exports = {
     async showDeviceCount(req, res) {
         const json = req.params;
 
-        const sensor = await Sensor.find({ device_id: json.device_id })
+        const sensor = await Sensor.find({ 'device.id': json.id })
         
         var count = Object.keys(sensor).length
 

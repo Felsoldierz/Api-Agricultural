@@ -1,8 +1,12 @@
 const mongoose = require('mongoose');
 
 const SensorSchema = new mongoose.Schema({
-    device_id: Number,
-    datatype_id: Number
+    device: {
+        id: String
+    },
+    datatype: {
+        id: String
+    }
 });
 
 module.exports = mongoose.model('Sensor', SensorSchema);

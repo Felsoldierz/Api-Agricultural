@@ -22,7 +22,7 @@ module.exports = {
     async show(req, res) {
         const json = req.body;
 
-        const device = await Device.find({ person_id: json.person_id })
+        const device = await Device.find({'person.id' : json.id})
 
         return res.json(device)
     },
@@ -38,7 +38,7 @@ module.exports = {
     async count(req, res) {
         const json = req.body;
 
-        const device = await Device.find({ person_id: json.person_id })
+        const device = await Device.find({'person.id' : json.person.id})
         var count = Object.keys(device).length
 
         return res.json({"count": count})
@@ -47,14 +47,14 @@ module.exports = {
     async showPersonDevice(req, res) {
         const json = req.params;
 
-        const device = await Device.find({ person_id: json.person_id })
+        const device = await Device.find({'person.id' : json.id})
 
         return res.json(device)
     },
 
     async showPersonDeviceCount(req, res) {
         const json = req.params;
-        const device = await Device.find({ person_id: json.person_id })
+        const device = await Device.find({'person.id' : json.id})
 
         var count = Object.keys(device).length
 
@@ -82,14 +82,14 @@ module.exports = {
     async showAreaDevice(req, res) {
         const json = req.params;
         
-        const device = await Device.find({ area_id : json.area_id })
+        const device = await Device.find({'area.id' : json.id})
         
         return res.json(device)
     },
 
     async showAreaDeviceCount(req, res) {
         const json = req.params;
-        const device = await Device.find({ area_id: json.area_id })
+        const device = await Device.find({'area.id' : json.id})
   
 
         var count = Object.keys(device).length

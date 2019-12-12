@@ -4,7 +4,9 @@ const MeasurementSchema = new mongoose.Schema({
     value: Number,
     description: String,
     datetime: Date,
-    sensor_id: Number,
+    sensor: {
+        id: String
+    }
 });
 
 module.exports = mongoose.model('Measurement', MeasurementSchema);

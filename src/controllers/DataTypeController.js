@@ -1,5 +1,6 @@
 const DataType = require('../models/DataType');
 
+
 /**
  * 
  *   index: Listar todos registros;
@@ -12,14 +13,14 @@ module.exports = {
     async create(req, res) {
         const json = req.body;
         datatype = await DataType.create(json);
- 
+        
 
         return res.json(datatype);
     },
 
     async edit(req, res) {
         const json = req.body;
-        let datatype = await DataType.findOne({ _id: json.id });
+        let datatype = await DataType.findOne({_id: json.id});
 
         if (datatype) {
             datatype = await DataType.update({ _id: json.id}, json)
@@ -30,8 +31,7 @@ module.exports = {
 
     async show(req, res) {
         const json = req.body;
-
-        const datatype = await DataType.find({ person_id: json.person_id })
+        const datatype = await DataType.find({'person.id' : json.person.id})
 
         return res.json(datatype)
     },
@@ -47,7 +47,7 @@ module.exports = {
     async count(req, res) {
         const json = req.body;
 
-        const datatype = await DataType.find({ person_id: json.person_id })
+        const datatype = await DataType.find({'person.id' : json.id})
         var count = Object.keys(datatype).length
 
         return res.json({"count": count})
@@ -56,14 +56,14 @@ module.exports = {
     async showPersonDataType(req, res) {
         const json = req.params;
 
-        const datatype = await DataType.find({ person_id: json.id })
+        const datatype = await DataType.find({'person.id' : json.id})
 
         return res.json(datatype)
     },
 
     async showPersonDataTypeCount(req, res) {
         const json = req.params;
-        const datatype = await DataType.find({ person_id: json.id })
+        const datatype = await DataType.find({'person.id' : json.id})
 
         var count = Object.keys(datatype).length
 
