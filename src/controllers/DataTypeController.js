@@ -13,8 +13,6 @@ module.exports = {
     async create(req, res) {
         const json = req.body;
         datatype = await DataType.create(json);
-        
-
         return res.json(datatype);
     },
 

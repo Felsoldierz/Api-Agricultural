@@ -1,12 +1,14 @@
 const express = require('express');
+const { Validator } = require('express-json-validator-middleware');
+const validator = new Validator({ allErrors: true }); // pass in options to the Ajv instance;
 
 
 const DataTypeController = require('../controllers/DataTypeController');
-
+const DataTypeValidationSchema = require('../models/DataTypeValidationSchema');
 
 const router = express.Router();
 
-router.post('/',DataTypeController.create);
+router.post('/',validator.validate({ body: DataTypeValidationSchema}),DataTypeController.create);
 router.get('/', DataTypeController.show);
 router.put('/',DataTypeController.edit)
 router.get('/count',DataTypeController.count)

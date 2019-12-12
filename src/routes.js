@@ -2,13 +2,13 @@ const express = require('express')
 
 const router = express.Router()
 
-const userRoutes = require('./routes/user')
+
 const dataTypeRoutes = require('./routes/dataType')
 const deviceRoutes = require('./routes/device')
 const sensorRoutes = require('./routes/sensor')
 const measurementRoutes = require('./routes/measurement')
 
-router.use('/user', userRoutes)
+
 router.use('/datatype',dataTypeRoutes)
 router.use('/device',deviceRoutes)
 router.use('/device',sensorRoutes)

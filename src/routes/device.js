@@ -1,12 +1,13 @@
 const express = require('express');
-
+const { Validator } = require('express-json-validator-middleware');
+const validator = new Validator({ allErrors: true }); // pass in options to the Ajv instance;
 
 const DeviceController = require('../controllers/DeviceController');
-
+const DeviceValidationSchema = require('../models/DeviceValidationSchema');
 
 const router = express.Router();
 
-router.post('/',DeviceController.create);
+router.post('/',validator.validate({ body: DeviceValidationSchema}),DeviceController.create);
 router.get('/', DeviceController.show);
 router.put('/',DeviceController.edit)
 router.get('/count',DeviceController.count)

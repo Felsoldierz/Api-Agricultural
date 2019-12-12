@@ -1,12 +1,13 @@
 const express = require('express');
-
+const { Validator } = require('express-json-validator-middleware');
+const validator = new Validator({ allErrors: true }); // pass in options to the Ajv instance;
 
 const MeasurementController = require('../controllers/MeasurementController');
-
+const MeasurementValidationSchema = require('../models/MeasurementValidationSchema');
 
 const router = express.Router();
 
-router.post('/',MeasurementController.create);
+router.post('/',validator.validate({ body: MeasurementValidationSchema}),MeasurementController.create);
 router.get('/', MeasurementController.show);
 router.put('/',MeasurementController.edit)
 router.get('/device/:id', MeasurementController.showDeviceMeasurement)

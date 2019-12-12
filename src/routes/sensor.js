@@ -1,12 +1,14 @@
 const express = require('express');
-
+const { Validator } = require('express-json-validator-middleware');
+const validator = new Validator({ allErrors: true }); // pass in options to the Ajv instance;
 
 const SensorController = require('../controllers/SensorController');
+const SensorValidationSchema = require('../models/SensorValidationSchema');
 
 
 const router = express.Router();
 
-router.post('/sensor',SensorController.create);
+router.post('/sensor',validator.validate({ body: SensorValidationSchema}), SensorController.create);
 router.put('/sensor',SensorController.edit)
 router.get('/sensor/area/:id',SensorController.showArea)
 router.get('/sensor/area/:id/count', SensorController.showAreaCount)
