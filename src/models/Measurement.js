@@ -4,6 +4,7 @@ const MeasurementSchema = new mongoose.Schema({
     value: Number,
     description: String,
     datetime: Date,
+    geometry: String,
     sensor: {
         id: String
     }

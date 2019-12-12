@@ -30,8 +30,8 @@ module.exports = {
     },
 
     async show(req, res) {
-        const json = req.body;
-        const datatype = await DataType.find({'person.id' : json.person.id})
+        const { userid } = req.headers;
+        const datatype = await DataType.find({'person.id' : userid})
 
         return res.json(datatype)
     },
@@ -45,9 +45,9 @@ module.exports = {
   
 
     async count(req, res) {
-        const json = req.body;
+        const { userid } = req.headers;
 
-        const datatype = await DataType.find({'person.id' : json.id})
+        const datatype = await DataType.find({'person.id' : userid})
         var count = Object.keys(datatype).length
 
         return res.json({"count": count})

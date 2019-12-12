@@ -21,9 +21,9 @@ module.exports = {
     },
 
     async show(req, res) {
-        const json = req.body;
+        const { userid } = req.headers;
 
-        const measurement = await Measurement.find({ 'person.id': json.id })
+        const measurement = await Measurement.find({ 'person.id': userid})
 
         return res.json(measurement)
     },

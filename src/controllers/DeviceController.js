@@ -20,9 +20,9 @@ module.exports = {
     },
 
     async show(req, res) {
-        const json = req.body;
+        const { userid } = req.headers;
 
-        const device = await Device.find({'person.id' : json.id})
+        const device = await Device.find({'person.id' : userid})
 
         return res.json(device)
     },
@@ -36,9 +36,9 @@ module.exports = {
   
 
     async count(req, res) {
-        const json = req.body;
+        const { userid } = req.headers;
 
-        const device = await Device.find({'person.id' : json.person.id})
+        const device = await Device.find({'person.id' : userid})
         var count = Object.keys(device).length
 
         return res.json({"count": count})

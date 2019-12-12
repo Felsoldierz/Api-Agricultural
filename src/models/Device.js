@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const DeviceSchema = new mongoose.Schema({
     description: String,
     situation: Number,
+    geometry: String,
     area: {
         id: Number
     },
